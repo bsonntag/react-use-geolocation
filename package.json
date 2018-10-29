@@ -1,6 +1,6 @@
 {
   "name": "react-use-geolocation",
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "description": "React hook for accessing geolocation.",
   "keywords": [
     "geolocation",
