@@ -1,9 +1,9 @@
 import { render } from 'react-dom';
-import { useWatchPosition } from '../src';
+import { useCurrentPosition } from '../src';
 import React from 'react';
 
 const Example = () => {
-  const [position, error] = useWatchPosition();
+  const [position, error] = useCurrentPosition();
 
   if (!position && !error) {
     return 'Waiting...';
