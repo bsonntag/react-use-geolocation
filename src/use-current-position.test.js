@@ -1,49 +1,28 @@
-import { render, wait } from 'react-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
 import { useCurrentPosition } from './use-current-position';
-import React from 'react';
 
-const Test = () => {
-  const [position, error] = useCurrentPosition();
+afterEach(() => {
+  delete navigator.geolocation;
+});
 
-  if (!position && !error) {
-    return 'waiting';
-  }
-
-  if (error) {
-    return error;
-  }
-
-  return position;
-};
-
-beforeEach(() => delete navigator.geolocation);
-
-test('should return the position', async () => {
+test('should return the position', () => {
   navigator.geolocation = {
     getCurrentPosition: onSuccess => onSuccess('foo')
   };
 
-  const { container, rerender } = render(<Test />);
+  const { result } = renderHook(() => useCurrentPosition());
+  const [position] = result.current;
 
-  expect(container).toHaveTextContent('waiting');
-
-  await wait(() => {
-    rerender(<Test />);
-    expect(container).toHaveTextContent('foo');
-  });
+  expect(position).toBe('foo');
 });
 
-test('should return the error', async () => {
+test('should return the error', () => {
   navigator.geolocation = {
     getCurrentPosition: (onSuccess, onError) => onError('bar')
   };
 
-  const { container, rerender } = render(<Test />);
+  const { result } = renderHook(() => useCurrentPosition());
+  const [, error] = result.current;
 
-  expect(container).toHaveTextContent('waiting');
-
-  await wait(() => {
-    rerender(<Test />);
-    expect(container).toHaveTextContent('bar');
-  });
+  expect(error).toBe('bar');
 });
