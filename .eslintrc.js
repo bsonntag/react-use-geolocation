@@ -1,6 +1,4 @@
 module.exports = {
-  env: {
-    browser: 1,
-  },
-  extends: 'seegno'
+  env: { browser: 1 },
+  extends: '@bsonntag',
 };
