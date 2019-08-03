@@ -1,55 +1,34 @@
-import { render, wait } from 'react-testing-library';
+import { act, renderHook } from '@testing-library/react-hooks';
 import { useWatchPosition } from './use-watch-position';
 import EventEmitter from 'events';
-import React from 'react';
 
-const Test = () => {
-  const [position, error] = useWatchPosition();
+afterEach(() => {
+  delete navigator.geolocation;
+});
 
-  if (!position && !error) {
-    return 'waiting';
-  }
-
-  if (error) {
-    return error;
-  }
-
-  return position;
-};
-
-beforeEach(() => delete navigator.geolocation);
-
-test('should return the position', async () => {
+test('should return the position', () => {
   navigator.geolocation = {
     watchPosition: onSuccess => onSuccess('foo')
   };
 
-  const { container, rerender } = render(<Test />);
+  const { result } = renderHook(() => useWatchPosition());
+  const [position] = result.current;
 
-  expect(container).toHaveTextContent('waiting');
-
-  await wait(() => {
-    rerender(<Test />);
-    expect(container).toHaveTextContent('foo');
-  });
+  expect(position).toBe('foo');
 });
 
-test('should return the error', async () => {
+test('should return the error', () => {
   navigator.geolocation = {
     watchPosition: (onSuccess, onError) => onError('bar')
   };
 
-  const { container, rerender } = render(<Test />);
+  const { result } = renderHook(() => useWatchPosition());
+  const [, error] = result.current;
 
-  expect(container).toHaveTextContent('waiting');
-
-  await wait(() => {
-    rerender(<Test />);
-    expect(container).toHaveTextContent('bar');
-  });
+  expect(error).toBe('bar');
 });
 
-test('should return the updated position', async () => {
+test('should return the updated position', () => {
   const emitter = new EventEmitter();
 
   navigator.geolocation = {
@@ -60,18 +39,18 @@ test('should return the updated position', async () => {
     }
   };
 
-  const { container, rerender } = render(<Test />);
+  const { result } = renderHook(() => useWatchPosition());
+  let position = result.current[0];
 
-  expect(container).toHaveTextContent('waiting');
+  expect(position).toBe('foo');
 
-  await wait(() => {
-    rerender(<Test />);
-    expect(container).toHaveTextContent('foo');
+  act(() => {
+    emitter.emit('update', 'bar');
   });
 
-  emitter.emit('update', 'bar');
+  position = result.current[0];
 
-  expect(container).toHaveTextContent('bar');
+  expect(position).toBe('bar');
 });
 
 test('should clear the watch', () => {
@@ -80,7 +59,7 @@ test('should clear the watch', () => {
     watchPosition: () => 'foo'
   };
 
-  const { unmount } = render(<Test />);
+  const { unmount } = renderHook(() => useWatchPosition());
 
   unmount();
 
