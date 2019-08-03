@@ -33,27 +33,25 @@
     ],
     "setupTestFrameworkScriptFile": "./jest-setup.js"
   },
-  "dependencies": {
-    "react-use-promise": "^0.0.0-alpha.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react-hooks": "^1.1.0",
     "babel-core": "^7.0.0-bridge",
-    "babel-jest": "^23.6.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.5",
     "eslint": "^5.7.0",
     "eslint-config-seegno": "^11.0.1",
-    "jest": "^23.6.0",
-    "jest-dom": "^2.1.0",
-    "parcel-bundler": "^1.10.3",
-    "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1",
-    "react-testing-library": "^5.2.3"
+    "jest": "^24.8.0",
+    "parcel": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6"
   },
   "peerDependencies": {
-    "react": "^16.8.0-alpha.1"
+    "react": "^16.8.0"
   }
 }
