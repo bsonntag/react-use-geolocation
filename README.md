@@ -5,14 +5,6 @@
 
 React hook for accessing geolocation.
 
-## Disclaimer
-
-This module uses the upcoming [React Hooks API Proposal](https://reactjs.org/docs/hooks-intro.html)
-which is **subject to change** until released to a final version.
-
-This means that the API of this module is also subject to change.
-Please **don't** use it on a production application.
-
 ## Installation
 
 Using npm:
@@ -27,12 +19,12 @@ Using yarn:
 $ yarn add react-use-geolocation
 ```
 
-Since this module uses React's upcoming Hooks feature,
-to try this out you'll need to install the `16.7.0-alpha.0` version
+Since this module uses React's new Hooks feature,
+to try this out you'll need to install the `16.8.0` version
 of `react` and `react-dom`:
 
 ```sh
-$ yarn add react@16.7.0-alpha.0 react-dom@16.7.0-alpha.0
+$ yarn add react@^16.8.0 react-dom@^16.8.0
 ```
 
 ## Usage
