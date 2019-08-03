@@ -31,7 +31,12 @@
       "lcov",
       "text"
     ],
-    "setupTestFrameworkScriptFile": "./jest-setup.js"
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest-setup.js"
+    ]
   },
   "dependencies": {},
   "devDependencies": {
