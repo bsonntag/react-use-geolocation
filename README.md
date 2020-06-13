@@ -1,7 +1,6 @@
 # react-use-geolocation
 
 [![CircleCI](https://circleci.com/gh/bsonntag/react-use-geolocation.svg?style=svg)](https://circleci.com/gh/bsonntag/react-use-geolocation)
-[![Coverage Status](https://coveralls.io/repos/github/bsonntag/react-use-geolocation/badge.svg?branch=master)](https://coveralls.io/github/bsonntag/react-use-geolocation?branch=master)
 
 React hook for accessing geolocation.
 
