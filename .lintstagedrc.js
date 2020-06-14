@@ -1,4 +1,5 @@
 module.exports = {
-  '*.js': ['eslint --fix', 'git add'],
-  'src/*.js': 'jest --findRelatedTests',
+  '*.js': ['eslint --fix', 'prettier --write'],
+  '*.{css,html,json,md}': ['prettier --write'],
+  'src/*.js': ['jest --find-related-tests'],
 };
