@@ -22,9 +22,6 @@
   },
   "jest": {
     "coverageDirectory": "coverage",
-    "coveragePathIgnorePatterns": [
-      "jest-setup.js"
-    ],
     "coverageReporters": [
       "html",
       "lcov",
@@ -32,9 +29,6 @@
     ],
     "roots": [
       "<rootDir>/src/"
-    ],
-    "setupFilesAfterEnv": [
-      "./jest-setup.js"
     ]
   },
   "dependencies": {},

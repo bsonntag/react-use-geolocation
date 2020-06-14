@@ -2,14 +2,15 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { useWatchPosition } from './use-watch-position';
 import EventEmitter from 'events';
 
-afterEach(() => {
-  delete navigator.geolocation;
+beforeEach(() => {
+  navigator.geolocation = {
+    clearWatch: jest.fn(),
+    watchPosition: jest.fn(),
+  };
 });
 
 test('should return the position', () => {
-  navigator.geolocation = {
-    watchPosition: onSuccess => onSuccess('foo')
-  };
+  navigator.geolocation.watchPosition = (onSuccess) => onSuccess('foo');
 
   const { result } = renderHook(() => useWatchPosition());
   const [position] = result.current;
@@ -18,9 +19,7 @@ test('should return the position', () => {
 });
 
 test('should return the error', () => {
-  navigator.geolocation = {
-    watchPosition: (onSuccess, onError) => onError('bar')
-  };
+  navigator.geolocation.watchPosition = (onSuccess, onError) => onError('bar');
 
   const { result } = renderHook(() => useWatchPosition());
   const [, error] = result.current;
@@ -31,12 +30,10 @@ test('should return the error', () => {
 test('should return the updated position', () => {
   const emitter = new EventEmitter();
 
-  navigator.geolocation = {
-    watchPosition(onSuccess) {
-      onSuccess('foo');
+  navigator.geolocation.watchPosition = (onSuccess) => {
+    onSuccess('foo');
 
-      emitter.on('update', onSuccess);
-    }
+    emitter.on('update', onSuccess);
   };
 
   const { result } = renderHook(() => useWatchPosition());
@@ -54,10 +51,7 @@ test('should return the updated position', () => {
 });
 
 test('should clear the watch', () => {
-  navigator.geolocation = {
-    clearWatch: jest.fn(),
-    watchPosition: () => 'foo'
-  };
+  navigator.geolocation.watchPosition = () => 'foo';
 
   const { unmount } = renderHook(() => useWatchPosition());
 
