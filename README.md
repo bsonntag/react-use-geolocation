@@ -45,12 +45,8 @@ function Example() {
 
   return (
     <div>
-      <p>
-        Latitude: {position.coords.latitude}
-      </p>
-      <p>
-        Longitude: {position.coords.longitude}
-      </p>
+      <p>Latitude: {position.coords.latitude}</p>
+      <p>Longitude: {position.coords.longitude}</p>
     </div>
   );
 }

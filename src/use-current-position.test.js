@@ -7,7 +7,7 @@ afterEach(() => {
 
 test('should return the position', () => {
   navigator.geolocation = {
-    getCurrentPosition: onSuccess => onSuccess('foo')
+    getCurrentPosition: (onSuccess) => onSuccess('foo'),
   };
 
   const { result } = renderHook(() => useCurrentPosition());
@@ -18,7 +18,7 @@ test('should return the position', () => {
 
 test('should return the error', () => {
   navigator.geolocation = {
-    getCurrentPosition: (onSuccess, onError) => onError('bar')
+    getCurrentPosition: (onSuccess, onError) => onError('bar'),
   };
 
   const { result } = renderHook(() => useCurrentPosition());

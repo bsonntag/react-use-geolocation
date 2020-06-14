@@ -8,12 +8,12 @@ export function useCurrentPosition(options) {
     let canceled = false;
 
     navigator.geolocation.getCurrentPosition(
-      position => {
+      (position) => {
         if (!canceled) {
           setPosition(position);
         }
       },
-      error => {
+      (error) => {
         if (!canceled) {
           setError(error);
         }

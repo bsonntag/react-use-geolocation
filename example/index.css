@@ -6,7 +6,8 @@ body {
   font-size: 20px;
 }
 
-body, p {
+body,
+p {
   margin: 0;
 }
 
